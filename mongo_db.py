@@ -59,7 +59,7 @@ def list_users():
 
 create_connection()
 create_db("ImageManagement")
-table_format("name","age","sex","place of birth")
+table_format("name","age","sex","place of birth","Photo")
 add_user("Rahul Saurav2")
-user_data("Rahul Saurav2","Rahul Saurav",24,"Male","Bihar")
+user_data("Rahul Saurav2","Rahul Saurav",24,"Male","Bihar","/home/N0maD/Pictures/Selection_004.jpg")
 list_users()
