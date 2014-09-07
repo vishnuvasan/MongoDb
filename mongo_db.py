@@ -5,12 +5,14 @@ def create_connection(hostname="localhost",portname=27017):
 	client=MongoClient(hostname,portname)
 
 def create_db(name):
+	import os
 	from os import mkdir
 	global db
 	global dbname
 	db=client[name]
 	dbname=name
-	mkdir(dbname)
+	if not os.path.isdir(dbname):
+		mkdir(dbname)
 	
 def add_collection(name):
 	global db
@@ -68,4 +70,6 @@ create_db("ImageManagement")
 table_format("name","age","sex","place of birth","Photo")
 add_user("Rahul Saurav2")
 user_data("Rahul Saurav2","Rahul Saurav",24,"Male","Bihar","/home/N0maD/Pictures/Selection_004.jpg")
+user_data("Rahul Saurav2","Rahul Saurav",24,"Male","Bihar","/home/N0maD/Pictures/Selection_005.jpg")
+
 list_users()
