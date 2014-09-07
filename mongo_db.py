@@ -1,5 +1,4 @@
 from pymongo import *
-#userentry=dict()
 
 def create_connection(hostname="localhost",portname=27017):
 	global client
@@ -29,27 +28,32 @@ def add_user(name):
 		add_collection(name)
 
 def table_format(*key):
-	global userentry
-	userentry=dict()
-	for i in range(0,len(key)): 
-		userentry[str(key[i])]=""
+	global table_entry
+	table_entry=key	
+	#for i in range(0,len(key)): 
+	#	table_entry[i]=""
 
 def user_data(name,*data):
+	global userentry
+	userentry=dict()
 	name=name.replace(" ","")
 	current_user=db[name]
-	count=0
-	for key in userentry.keys():
-		userentry[key]=str(data[count])
-		count+=1
+
+	if(len(data)!= len(table_entry)):
+		raise "The Number of Entries does not match"
+
+	for i in range(0,len(table_entry)):
+		userentry[str(table_entry[i])]=str(data[i])
+		
 	current_user.insert(userentry)
 	
-userentry={"name":"unknown"}
+#userentry={"name":"unknown"}
 
 create_connection()
 create_db("ImageManagement")
 table_format("name","age","sex","place of birth")
-add_user("Rahul Saurav")
-user_data("Rahul Saurav","Rahul Saurav",24,"Male","Bihar")
+add_user("Rahul Saurav1")
+user_data("Rahul Saurav1","Rahul Saurav",24,"Male","Bihar")
 
 for i in range(0,100):
 	username="User"+str(i)
