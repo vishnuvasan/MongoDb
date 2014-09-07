@@ -49,6 +49,8 @@ def user_data(name,*data):
 	for i in range(0,len(table_entry)):
 		userentry[str(table_entry[i])]=str(data[i])
 		
+	if(userentry["Photo"]!=""):
+		cpy(userentry["Photo"],dbname+"/"+name)
 	current_user.insert(userentry)
 	
 def list_users():
@@ -56,6 +58,10 @@ def list_users():
 		user_list[i]=user_list[i].replace("u'","")
 		user_list[i]=user_list[i].replace("'","")
 		print(user_list[i])
+
+def cpy(src,dst):
+	from shutil import copy2
+	copy2(src,dst)
 
 create_connection()
 create_db("ImageManagement")
