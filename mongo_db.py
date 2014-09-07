@@ -13,6 +13,7 @@ def add_collection(name):
 	db.create_collection(name)
 
 def add_user(name):
+	from os import mkdir
 	global user_list
 	existing_user=False
 	user_list=db.collection_names()		
@@ -26,6 +27,7 @@ def add_user(name):
 	
 	if not existing_user:
 		add_collection(name)
+		mkdir("./DataManagement/"+name)
 
 def table_format(*key):
 	global table_entry
