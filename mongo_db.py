@@ -30,8 +30,6 @@ def add_user(name):
 def table_format(*key):
 	global table_entry
 	table_entry=key	
-	#for i in range(0,len(key)): 
-	#	table_entry[i]=""
 
 def user_data(name,*data):
 	global userentry
@@ -40,25 +38,22 @@ def user_data(name,*data):
 	current_user=db[name]
 
 	if(len(data)!= len(table_entry)):
-		raise "The Number of Entries does not match"
+		raise Exception,"Data does not match the Table Format"
 
 	for i in range(0,len(table_entry)):
 		userentry[str(table_entry[i])]=str(data[i])
 		
 	current_user.insert(userentry)
 	
-#userentry={"name":"unknown"}
+def list_users():
+	for i in range(0,len(user_list)):
+		user_list[i]=user_list[i].replace("u'","")
+		user_list[i]=user_list[i].replace("'","")
+		print(user_list[i])
 
 create_connection()
 create_db("ImageManagement")
 table_format("name","age","sex","place of birth")
 add_user("Rahul Saurav1")
 user_data("Rahul Saurav1","Rahul Saurav",24,"Male","Bihar")
-
-for i in range(0,100):
-	username="User"+str(i)
-	add_user(username)
-        #collection=db[username]
-	#collection.insert(userentry)	
-
-
+list_users()
